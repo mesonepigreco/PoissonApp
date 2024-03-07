@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>Poisson equation</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<div class="playground">
+			<canvas id="canvas" width="600" height="400"></canvas>
+		</div>
+		<div class="ctrl-panel">
+			<div class="add-panel">
+				<a class="button" href="javascript:add_box()">Add box</a>
+				<a class="button" href="javascript:clear_boxes()">Clear boxes</a>
+			</div>
+			<div class="properties-panel">
+				<div class="property"> 
+					<label>Potential:</label>
+					<input type="range" id="potential-slider" min="-5" max="5" value="0" step="0.5"></slider>
+					<span id="potential-value">0</span>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="module" src="main.js"></script>
+</html>
+		
+
