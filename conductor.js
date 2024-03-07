@@ -1,6 +1,6 @@
-import {Object} from "./object.js";
+import customObject from "./object.js";
 
-export default class Conductor extends Object {
+export class Conductor extends customObject {
 	constructor(shape, potential = 0, charge = 0, fix_potential = true) {
 		super(shape);
 		this.potential = potential;
@@ -8,12 +8,12 @@ export default class Conductor extends Object {
 		this.fix_potential = fix_potential;
 
 		// Prepare a color for conductors
-		this.color = "#dddddd";
+		this.shape.color = "#cccccc";
 	}
 
 	applyFixedPotential(V_array, delta, fix_mask) {
-		Nx = V_array.length;
-		Ny = V_array[0].length;
+		let Nx = V_array.length;
+		let Ny = V_array[0].length;
 
 		for (let i = 0; i < Nx; i++) {
 			for (let j = 0; j < Ny; j++) {
@@ -23,6 +23,10 @@ export default class Conductor extends Object {
 				}
 			}
 		}
+	}
+
+	draw(ctx) {
+		this.shape.draw(ctx);
 	}
 }
 

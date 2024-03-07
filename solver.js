@@ -5,24 +5,18 @@
  * @param {Array} charge_density - The charge density (2D)
  * @return {Array} V_array - The array of the potential (2D) with the new values
  */
-export function poisson_one_step(V_array, fixed_mask, charge_density) {
-	Nx = V_array.length;
-	Ny = V_array[0].length;
-
-	// Copy the array of the potential
-	V_new = V_array.map(function(arr) {
-		return arr.slice();
-	});
-	
+export function poisson_one_step(V_array, fixed_mask, charge_density, V_new) {
+	let Nx = V_array.length;
+	let Ny = V_array[0].length;
 
 	for (let i = 0; i < Nx; i++) {
 		for (let j = 0; j < Ny; j++) {
 			if (fixed_mask[i][j] == 0) {
 				// Apply the periodic boundary conditions
-				i_prev = (i - 1 + Nx) % Nx;
-				i_next = (i + 1) % Nx;
-				j_prev = (j - 1 + Ny) % Ny;
-				j_next = (j + 1) % Ny;
+				let i_prev = (i - 1 + Nx) % Nx;
+				let i_next = (i + 1) % Nx;
+				let j_prev = (j - 1 + Ny) % Ny;
+				let j_next = (j + 1) % Ny;
 
 				// Integrate the Poisson law
 				V_new[i][j] = 0.25 * (V_array[i_prev][j] + V_array[i_next][j] + V_array[i][j_prev] + V_array[i][j_next] + charge_density[i][j]);
@@ -30,7 +24,16 @@ export function poisson_one_step(V_array, fixed_mask, charge_density) {
 		}
 	}
 
-	return V_new;
+	// Copy the V_new back into V_array
+	
+	for (let i = 0; i < Nx; i++) {
+		for (let j = 0; j < Ny; j++) {
+			if (fixed_mask[i][j] == 0) {
+				V_array[i][j] = V_new[i][j];
+			}
+		}
+	}
+	
 }
 
 /*
@@ -42,8 +45,8 @@ export function poisson_one_step(V_array, fixed_mask, charge_density) {
  * @return {Array} [E_x, E_y] - The electric field (2D) on a grid of Delta resolution
  */
 export function get_electric_field(V_array, Delta) {
-	Nx = V_array.length;
-	Ny = V_array[0].length;
+	let Nx = V_array.length;
+	let Ny = V_array[0].length;
 
 	E_x = [];
 	E_y = [];

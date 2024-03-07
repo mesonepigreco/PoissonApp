@@ -2,6 +2,7 @@
 	<head>
 		<title>Poisson equation</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="module" src="main.js"></script>
 	</head>
 	<body>
 		<div class="playground">
@@ -9,8 +10,8 @@
 		</div>
 		<div class="ctrl-panel">
 			<div class="add-panel">
-				<a class="button" href="javascript:add_box()">Add box</a>
-				<a class="button" href="javascript:clear_boxes()">Clear boxes</a>
+				<a id="add-box" class="button">Add box</a>
+				<a id="clear" class="button">Clear boxes</a>
 			</div>
 			<div class="properties-panel">
 				<div class="property"> 
@@ -21,7 +22,6 @@
 			</div>
 		</div>
 	</body>
-	<script type="module" src="main.js"></script>
 </html>
 		
 

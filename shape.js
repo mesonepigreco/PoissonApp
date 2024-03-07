@@ -3,6 +3,10 @@ export default class Shape {
 		this.x = x;
 		this.y = y;
 		this.color = "#000000";
+		this.is_dragging = false;
+		this.drag_delta_x = 0;
+		this.drag_delta_y = 0;
+		this.selected = false;
 	}
 
 	draw(ctx) {
@@ -17,6 +21,8 @@ export class Box extends Shape {
 	}
 
 	contains(x, y) {
+		let condition = (x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height);
+
 		return (x >= this.x && x <= this.x + this.width && y >= this.y && y <= this.y + this.height);
 	}
 
@@ -25,6 +31,13 @@ export class Box extends Shape {
 		ctx.save();
 		ctx.fillStyle = this.color;
 		ctx.fillRect(this.x, this.y, this.width, this.height);
+
+		// Draw the border if the box is selected
+		if (this.selected) {
+			ctx.strokeStyle = "#ff0000";
+			ctx.lineWidth = 2;
+			ctx.strokeRect(this.x, this.y, this.width, this.height);
+		}
 		ctx.restore();
 	}
 }
