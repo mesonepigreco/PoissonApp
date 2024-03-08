@@ -5,30 +5,46 @@
 		<script type="module" src="main.js"></script>
 	</head>
 	<body>
-		<div class="playground">
-			<canvas id="canvas" width="600" height="400"></canvas>
-		</div>
-		<div class="ctrl-panel">
-			<div class="add-panel">
-				<a id="add-box" class="button">Add box</a>
-				<a id="clear" class="button">Clear boxes</a>
+		<div class="playground-container">
+			<div class="playground">
+				<canvas id="canvas" width="600" height="300"></canvas>
 			</div>
-			<div class="properties-panel">
-				<div class="property"> 
-					<label>Potential:</label>
-					<input type="range" id="potential-slider" min="-5" max="5" value="0" step="0.5"></slider>
-					<span id="potential-value">0</span>
+			<div class="ctrl-panel">
+				<div class="add-panel">
+					<a id="add-box" class="button">Add box</a>
+					<a id="add-circle" class="button">Add circle</a>
+					<a id="clear" class="button">Clear</a>
 				</div>
-			</div>
-			<div class="info-panel">
-				<div class="info-item">
-					<label>Potential at mouse position:</label>
-					<span id="mouse-potential">0</span>
+				<div class="properties-panel">
+					<div class="property"> 
+						<label>Potential:</label>
+						<input type="range" id="potential-slider" min="-5" max="5" value="0" step="0.5"></slider>
+						<span class="data" id="potential-value"> +0.0</span>
+					</div>
+					<div class="property">
+						<label>Charge density:</label>
+						<span  class="data" id="charge-value">0</span>
 				</div>
-				<div class="info-item">
-					<label>Electric field at mouse position:</label>
-					<span id="mouse-field-x">0</span>, 
-					<span id="mouse-field-y">0</span>
+				<div class="info-panel">
+					<div class="info-item">
+						<label>Potential at mouse position:</label>
+						<span  class="data" id="mouse-potential">0</span>
+					</div>
+					<div class="info-item">
+						<label>Electric field at mouse position:</label>
+						<span class="data"  id="mouse-field-x">0</span>, 
+						<span class="data" id="mouse-field-y">0</span>
+					</div>
+					<div class="check-items">
+						<div class="onecheck">
+							<label for="show-field">Show electric field</label>
+							<input type="checkbox" id="show-field" checked>
+						</div>
+						<div class="onecheck">
+							<label for="show-charge">Show charge density</label>
+							<input type="checkbox" id="show-charge" checked>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

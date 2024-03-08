@@ -11,13 +11,14 @@ export class Conductor extends customObject {
 		this.shape.color = "#cccccc";
 	}
 
-	applyFixedPotential(V_array, delta, fix_mask) {
+	applyFixedPotential(V_array, dx, dy, fix_mask) {
 		let Nx = V_array.length;
 		let Ny = V_array[0].length;
 
+		//console.log("Applying fixed potential:", this.shape.x * dx, this.shape.y * dy);
 		for (let i = 0; i < Nx; i++) {
 			for (let j = 0; j < Ny; j++) {
-				if (this.shape.contains(i, j)) {
+				if (this.shape.contains(i*dx, j*dy)) {
 					V_array[i][j] = this.potential;
 					fix_mask[i][j] = 1;
 				}
