@@ -84,7 +84,7 @@ export function draw_charge_density(ctx, Nx, Ny, charge_density, delta, dx_pixel
 				}
 
 				// Prepare a path that is the square represented by the pixel
-				ctx.rect(x, y, dx_pixel, dy_pixel);
+				ctx.rect(x - dx_pixel/2, y - dx_pixel/2, dx_pixel, dy_pixel);
 
 				ctx.fill();
 				ctx.closePath();
