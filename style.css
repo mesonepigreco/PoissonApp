@@ -1,0 +1,109 @@
+.playground-container {
+	width: 100%;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
+.playground {
+	/* Add a black border around the playground */
+	border: 1px solid black;
+	/* Make the playground to be 100% of the width of the screen */
+	width: 100%;
+	margin: 2px;
+	/* If the height of the canvas goes beyond the 80% of the screen
+	 * Then adjust the height to be maximum 80% of the screen
+	 * and fix the width to satisfy the aspect ratio of the canvas
+	 */
+}
+
+/* define the style for the canvas inside the playground */
+.playground canvas {
+	/* Make the canvas to be 100% of the width of the playground */
+	width: 100%;
+	height: 100%;
+
+	/* Make the canvas to be 100% of the width of the playground */
+	background-color: white;
+	}
+
+.ctrl-panel {
+	margin:30px;
+	margin-top: 10px;
+	width: 100%;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.add-panel {
+	display:flex;
+	flex-flow: row;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+}
+
+.properties-panel {
+}
+
+.button {
+	/* Add some padding to the button */
+	padding: 10px;
+	/* Add some margin to the button */
+	margin: 0px 10px 10px 10px;
+	/* Add a border to the button */
+	border: 1px solid black;
+	/* Add a background color to the button */
+	background-color: white;
+	/* Add a cursor to the button */
+	cursor: pointer;
+	/* Add a border radius to the button */
+	border-radius: 5px;
+	/* Add a transition to the button */
+	transition: 0.3s;
+}
+
+.button:hover {
+	/* Change the background color of the button when hovered */
+	background-color: #d2d2d2;
+}
+
+.data {
+	/* Use a font that is monospaced */
+	font-family: monospace;
+	/* Align the text to the right */
+	text-align: right;
+	white-space: pre-wrap;
+}
+
+.property {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.property label {
+	/* Add some margin to the label */
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.check-items {
+	display: flex;
+	flex-flow: row;
+	justify-content: space-around;
+	align-items: center;
+	margin-top: 5px;
+}
+.onecheck {
+	margin-left: 10px;
+	margin-right: 10px;
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
