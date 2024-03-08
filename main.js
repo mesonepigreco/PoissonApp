@@ -140,8 +140,7 @@ function clear_boxes() {
 // Get the context of the canvas
 const ctx = canvas.getContext("2d");
 
-// Add the event listner to the canvas
-canvas.addEventListener("mousedown", function(e) {
+function mouseSelect(e) {
 	// Get the mouse position, rescaling the width and height of the canvas style
 	let rect = canvas.getBoundingClientRect();
 	let mouseX = e.clientX - rect.left;
@@ -162,8 +161,8 @@ canvas.addEventListener("mousedown", function(e) {
 			update_potential(list_of_items[i].potential);
 		}
 	}
-});
-canvas.addEventListener("mousemove", function(e) {
+}
+function mouseMove(e) {
 	let mouseX = e.clientX - canvas.getBoundingClientRect().left;
 	let mouseY = e.clientY - canvas.getBoundingClientRect().top;
 	let scaleX = canvas.width / canvas.getBoundingClientRect().width;
@@ -179,30 +178,34 @@ canvas.addEventListener("mousemove", function(e) {
 	// Get the coordinates in the auxiliary position system
 	let x_pos = parseInt(mouseX / delta);
 	let y_pos = parseInt(mouseY / delta);
-
-	// console.log("x_pos = " + x_pos * dx_pixel + " y_pos = " + y_pos * dy_pixel);
-	// for (let i = 0; i < list_of_items.length; i++) {
-	// 	let xx = list_of_items[i].shape.x; 
-	// 	let yy = list_of_items[i].shape.y;
-	// 	console.log("conductor", i, "potential = ", list_of_items[i].potential, "pos = ", xx, yy);
-	// 	if (list_of_items[i].shape.contains(mouseX, mouseY)) {
-	// 		console.log("Inside!");
-	// 	}
-	// }
-
-	// console.log(V_array);
-	// console.log("x_pos = " + x_pos + " y_pos = " + y_pos);
-	// console.log("Lx = ", V_array.length);
-	// console.log("Varray[x_pos] = " + V_array[x_pos]);
-	
-
+	//
 	// Update the value of the potential in the mouse-potential object
 	potentialLabel.innerHTML = floatToString(V_array[x_pos][y_pos], 2);
 	exLabel.innerHTML = floatToString(efield_x[parseInt(x_pos/Delta)][parseInt(y_pos/Delta)] * 100.0, 2);
 	eyLabel.innerHTML = floatToString(efield_y[parseInt(x_pos/Delta)][parseInt(y_pos/Delta)] * 100.0, 2);
-});
-canvas.addEventListener("mouseup", function(e) {
+}
+
+function mouseUp(e) {
 	stop_dragging(list_of_items);
+}
+
+// Add the event listner to the canvas
+canvas.addEventListener("mousedown", mouseSelect);
+canvas.addEventListener("mousemove", mouseMove);
+canvas.addEventListener("mouseup", mouseUp);
+
+// Add the event listener for the touchscreen
+canvas.addEventListener("touchstart", function(e) {
+	e.preventDefault();
+	mouseSelect(e.touches[0]);
+});
+canvas.addEventListener("touchmove", function(e) {
+	e.preventDefault();
+	mouseMove(e.touches[0]);
+});
+canvas.addEventListener("touchend", function(e) {
+	e.preventDefault();
+	mouseUp(e.touches[0]);
 });
 
 // Prepare the potential array and the fixed mask
