@@ -46,6 +46,7 @@ const delta = 2.0;
 // The actual size of the simulation
 const Lx = canvas.width / delta; //200.0;
 const Ly = (Lx * canvas.height) / canvas.width;
+const drawingPolygon = false;
 
 const list_of_items = [];
 
