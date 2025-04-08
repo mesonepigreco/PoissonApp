@@ -60,6 +60,51 @@ export function poisson_one_step(V_array, fixed_mask, charge_density, V_new, del
 	
 }
 
+
+export function poisson_one_step_fast(V_array, fixed_mask, charge_density, delta) {
+	let Nx = V_array.length;
+	let Ny = V_array[0].length;
+
+	for (let i = 0; i < Nx; i++) {
+		for (let j = 0; j < Ny; j++) {
+			// Check if this is not NaN
+			if (!isNaN(V_array[i][j])) {
+				let i_prev = (i - 1 + Nx) % Nx;
+				let i_next = (i + 1) % Nx;
+				let j_prev = (j - 1 + Ny) % Ny;
+				let j_next = (j + 1) % Ny;
+
+				if (fixed_mask[i][j] == 0) {
+					// Apply the periodic boundary conditions
+				
+					// Integrate the Poisson law
+					V_array[i][j] = 0.25 * (V_array[i_prev][j] + V_array[i_next][j] + V_array[i][j_prev] + V_array[i][j_next]);// + charge_density[i][j] * delta*delta);
+
+					/*if (isNaN(V_new[i][j])) {
+						console.log("NaN detected at i = " + i + " j = " + j);
+						console.log("i_prev = " + i_prev + " i_next = " + i_next + " j_prev = " + j_prev + " j_next = " + j_next);
+						console.log(V_array[i_prev][j]);
+						console.log(V_array[i_next][j]);
+						console.log(V_array[i][j_prev]);
+						console.log(V_array[i][j_next]);
+						console.log(charge_density[i][j]);
+					}*/
+
+					// If it is undefined, set it to 0
+					if (V_array[i][j] == undefined) {
+						V_array[i][j] = 0;
+					}
+				}
+
+				// Update the charge density
+				let nabla2V = (V_array[i_prev][j] + V_array[i_next][j] + V_array[i][j_prev] + V_array[i][j_next] - 4 * V_array[i][j]) / (delta * delta);
+				charge_density[i][j] = - nabla2V;
+			}
+		}
+	}
+}
+
+
 /*
  * Evaluate the electric field from the potential
  * Use a Delta resolution with respect to the potential

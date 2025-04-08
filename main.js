@@ -2,7 +2,7 @@ import { Box, Circle } from './shape.js';
 import {floatToString} from './utils.js';
 import {Conductor} from './conductor.js';
 import {start_dragging, move_objects_on_drag, stop_dragging} from './drag_and_drop.js';
-import {poisson_one_step, get_electric_field} from './solver.js';
+import {poisson_one_step, poisson_one_step_fast, get_electric_field} from './solver.js';
 import {draw_efield, draw_charge_density} from './draw_efield.js';
 
 
@@ -291,7 +291,9 @@ function animate() {
 		}
 
 		// Solve the poisson equation
-		poisson_one_step(V_array, fixed_mask, charge_density, V_tmp, delta);
+		//poisson_one_step(V_array, fixed_mask, charge_density, V_tmp, delta);
+		poisson_one_step_fast(V_array, fixed_mask, charge_density, delta);
+
 
 		// Get the electric field
 		get_electric_field(V_array, Delta, efield_x, efield_y, delta);
